@@ -41,4 +41,21 @@ RSpec.describe "Item API search" do
     expect(results[2][:attributes][:name].downcase.include?("ca")).to eq(true)
     expect(results[3][:attributes][:name].downcase.include?("ca")).to eq(true)
   end
+
+
+    it "can get a item when searching" do
+      create(:item, name: "Sling Shot")
+      create(:item, name: "Slip Knot")
+
+      get '/api/v1/items/find?name=Sling'
+
+      expect(response).to be_successful
+
+      items = JSON.parse(response.body, symbolize_names: true)
+      expect(items).to be_a(Hash)
+      results = items[:data]
+      expect(results).to be_a Hash
+      expect(results[:attributes][:name].include?("Sling")).to eq(true)
+      # expect(results[:attributes][:name]).to_not include("Slip Knot")
+    end
 end
