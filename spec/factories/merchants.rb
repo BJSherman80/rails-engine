@@ -4,7 +4,7 @@ FactoryBot.define do
 
     trait :with_items do
       transient do
-        items { 2 }
+        items { 0 }
       end
       after :create do |merchant, evaluator|
         create_list(:item, evaluator.items, merchant: merchant)

@@ -1,6 +1,7 @@
-# FactoryBot.define do 
-#   factory :invoices do
-#     association :customer
-#     association :merchant
-#     status
-# end
+FactoryBot.define do
+  factory :invoice do
+    customer
+    merchant
+    status { %w[shipped packaged].sample }
+  end
+end
